@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
     /**
      * 
-     * @author yael Tochner
+     * @author Yael Tochner
      *
      */
 public class NameNumber {
@@ -31,9 +31,10 @@ public class NameNumber {
 	}
 
 
-    // Replaces each sequence of digits in text with the corresponding English words.
 	/**
-	 * @param text 
+	 * Replaces numbers between 0 and 9999 with the corresponding English words.
+	 * @param text The input text. 
+	 * @return The input text where each sequence of digits in range is replaced with the corresponding English words.
 	 */
     String numbersToWords(String text) {
         int n;
@@ -41,18 +42,24 @@ public class NameNumber {
         Matcher m = p.matcher(text);
         while (m.find()) {
             n = Integer.parseInt(m.group());
-            text = text.replaceFirst("\\d+", nameOf(n));
+            text = text.replaceFirst("" + n, nameOf(n));
         }
         text = text.trim();
         return text;
     }
 
 
-    /*Given any number in the range 0 to 9999, returns the word or words representing that number.
-        Words in the string are separated by exactly one space;
-        the returned string does not begin or end with a space.
+    /**
+     * Given any number in the range 0 to 9999, returns the word or words representing that number.
+     * Words in the string are separated by exactly one space.
+     * The returned string does not begin or end with a space.
+     * @param number
+     * The number to translate into words.
+     * @return
+     * If the number is between 0 and 9999 (inclusive), returns the English word or words representing the input number.
+     * Otherwise returns the input number itself.
      */
-    String nameOf(int number) { //throws Exception {
+    String nameOf(int number) {
         String answer = "";
 
         if (0 <= number && number <= 9) {
@@ -88,18 +95,24 @@ public class NameNumber {
                 answer += " " + nameOf(restOfNumber2);
             }
         } else {
-        	// if the number is < 0 or > 9999, leave it as digits
+        	// if the number is not in range, leave it as digits
         	answer = "" + number;
         }
 
         return answer;
     }
 
-    /*Given any number in the range 0 to 9, returns a single word representing that number 
-        (zero through nine).
+    /**
+     * Given any number in the range 0 to 9, returns a single word representing that number
+     * (zero through nine).
+     * @param number
+     * The input number.
+     * @return
+     * If the number is a digit, returns the English word representing it.
+     * Otherwise returns the input number.
      */
     String nameOfDigit(int number) {
-        String name = null;
+        String name = "" + number; // should never return this value for a correct input
         switch (number) {
         case 0: name = "zero";          break;
         case 1: name = "one";           break;
@@ -115,11 +128,17 @@ public class NameNumber {
         return name;
     }
 
-    /*Given any number in the range 1 to 9, returns a word representing that number of tens. 
-         That is, this method returns one of the words ten, twenty, thirty, ..., ninety.
+    /**
+     * Given any number in the range 1 to 9, returns a word representing that number of tens
+     * (ten, twenty, ..., ninety).
+     * @param number
+     * The input number.
+     * @return
+     * If the number is between 1 and 9, returns the English word representing that number of tens.
+     * Otherwise returns the input number.
      */
     String nameOfTensDigit(int number) {
-        String name = null;
+        String name = "" + number; // should never return this value for a correct input
         switch (number) {
         case 1: name = "ten";            break;
         case 2: name = "twenty";         break;
@@ -134,10 +153,17 @@ public class NameNumber {
         return name;
     }
 
-    /*Given any number in the range 10 to 19, returns a word representing that number. 
-     * That is, this method returns one of the words ten, eleven, twelve, ..., nineteen.*/
+    /**
+     * Given any number in the range 10 to 19, returns a word representing that number
+     * (ten, eleven, twelve, ..., nineteen).
+     * @param number
+     * The input number.
+     * @return
+     * If the number is between 10 and 19, returns the English word representing it.
+     * Otherwise returns the input number.
+     */ 
     String nameOfTeens(int number) {
-        String name = null;
+        String name = "" + number; // should never return this value for a correct input
         switch (number) {
         case 10: name = "ten";           break;
         case 11: name = "eleven";        break;
